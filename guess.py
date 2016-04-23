@@ -2,9 +2,10 @@ from bs4 import BeautifulSoup
 import requests
 SEARCH_ENDPOINT = 'http://wordassociations.net/search?hl=en&w='
 def make_request(word):
-	headers = {'user-agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36', 'referer' : 'http://wordassociations.net/search?hl=en&w=Tenderness'}
-	payload = {'hl':'en', 'w' : word}
+	# headers needed to simulate browsers. 
+	headers = {'user-agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36', 'referer' : 'http://wordassociations.net/search?hl=en&w=' + word}
 	return requests.post(SEARCH_ENDPOINT + word, headers=headers).text
+
 def find_associations(word):
 	html_str = make_request(word)
 	# print(html_str)
